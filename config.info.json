@@ -1,0 +1,32 @@
+{
+    "description": {
+        "en": "Here you can find all settings for this modification.",
+        "ru": "Тут можно найти все настройки этой модификации."
+    },
+    
+    "properties": {
+        "enabled": {
+            "name": {
+                "en": "Launch",
+                "ru": "Запуск"
+            },
+            "description": {
+                "en": "Changes launch state of modification; if disabled, mod willn't be launched.",
+                "ru": "Меняет состояния запускаемости мода, если отключено - мод запущен не будет."
+            },
+            "index": 0
+        },
+        
+        "sign_required_to_edit": {
+            "name": {
+                "en": "Sign Required to Edit",
+                "ru": "Для редактирования необходима табличка"
+            },
+            "description": {
+                "en": "Text will be edited only if there's a registered sign in hand.",
+                "ru": "Текст будет редактироваться, только если в руке будет находиться зарегистированная табличка."
+            },
+            "index": 1
+        }
+    }
+}

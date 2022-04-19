@@ -1,0 +1,5 @@
+{
+	"boot-classes": [
+		"io.nernar.innercore.signedit.SignEdit"
+	]
+}
