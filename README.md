@@ -7,4 +7,4 @@
 This project maintained from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/signedit). All rights belong to mod developers on Forge and are based solely on ideas presented in this mod.
 
 ## Introduction
-This lightweight Inner Core mod allows players to edit placed signs simply by right clicking them while holding a sign in their hand.
+This lightweight Inner Core mod allows players to edit placed signs simply by right clicking or tapping them while holding a sign in their hand.

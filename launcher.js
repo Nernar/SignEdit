@@ -1,5 +1,7 @@
 ConfigureMultiplayer({
-	isClientOnly: false
+	isClientOnly: true
 });
 
-Packages.io.nernar.innercore.signedit.SignEdit.setConfig(__config__);
+Callback.addCallback("API:KernelExtension", function() {
+	Packages.io.nernar.innercore.signedit.SignEdit.setConfig(__config__);
+}, 0);
