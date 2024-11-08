@@ -2,7 +2,7 @@
 	"$schema": "https://raw.githubusercontent.com/zheka2304/innercore-mod-toolchain/develop/toolchain/schemas/make.schema.json",
 	"info": {
 		"name": "SignEdit",
-		"version": "1.1.1",
+		"version": "1.2",
 		"author": "Nernar",
 		"description": "Click on sign to edit."
 	},
@@ -13,12 +13,17 @@
 			"type": "launcher",
 			"language": "javascript",
 			"source": "launcher.js"
+		},
+		{
+			"type": "main",
+			"language": "javascript",
+			"source": "script"
 		}
 	],
 	"compile": [
 		{
-			"source": "java/signedit",
-			"type": "java"
+			"type": "native",
+			"source": "native/signedit"
 		}
 	],
 	"additional": [
