@@ -1,0 +1,30 @@
+{
+	"$schema": "https://raw.githubusercontent.com/zheka2304/innercore-mod-toolchain/develop/toolchain/schemas/make.schema.json",
+	"info": {
+		"name": "SignEdit",
+		"version": "1.1.1",
+		"author": "Nernar",
+		"description": "Click on sign to edit."
+	},
+	"api": "Preloader",
+	"resources": [],
+	"sources": [
+		{
+			"type": "launcher",
+			"language": "javascript",
+			"source": "launcher.js"
+		}
+	],
+	"compile": [
+		{
+			"source": "java/signedit",
+			"type": "java"
+		}
+	],
+	"additional": [
+		{
+			"source": "assets/*",
+			"targetDir": "."
+		}
+	]
+}
