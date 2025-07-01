@@ -21,7 +21,8 @@ const SignEdit = {
 		"oak_sign", "birch_sign", "spruce_sign", "dark_oak_sign",
 		"acacia_sign", "jungle_sign", "warped_sign", "crimson_sign"
 	],
-	TILE_ENTITY_TYPE: ETileEntityType.SIGN || 4,
+	BLOCK_ENTITY_TYPE: ETileEntityType.SIGN || 4,
+	LIBRARY: WRAP_NATIVE("SignEdit"),
 	isSignRequiredToEdit() {
 		return this.signRequiredToEdit || false;
 	},
@@ -33,7 +34,7 @@ const SignEdit = {
 			id = VanillaItemID[id] || ItemID[id];
 		}
 		if (id == null || id == 0) {
-			Logger.error("ERROR", "SignEdit: Sign id " + arguments[0] + " not even registered!");
+			Logger.error("ERROR", "SignEdit: Sign id " + arguments[0] + " is not even registered!");
 			return false;
 		}
 		this.registeredSigns || (this.registeredSigns = []);
@@ -49,12 +50,37 @@ const SignEdit = {
 	}
 };
 
+if (SignEdit.LIBRARY == null) {
+	LowLevelUtils.throwException("SignEdit is not initialized properly, please make sure that library exist.");
+}
+
 for (let index = 0; index < SignEdit.VANILLA_SIGN_IDS.length; index++) {
 	SignEdit.registerSign(SignEdit.VANILLA_SIGN_IDS[index]);
 }
+SignEdit.setIsSignRequiredToEdit(__config__.getBool("sign_required_to_edit"));
 
-SignEdit.setIsSignRequiredToEdit(
-	__config__.getBool("sign_required_to_edit")
-);
+Callback.addCallback("ItemUseLocal", function(coords, item, block, playerUid) {
+	if (playerUid != null && Entity.getSneaking(playerUid)) {
+		return;
+	}
+	if (SignEdit.isSignRequiredToEdit() && !SignEdit.isRegisteredSign(item.id)) {
+		return;
+	}
+	const region = BlockSource.getCurrentClientRegion();
+	if (region != null) {
+		const sign = region.getBlockEntity(coords.x, coords.y, coords.z);
+		if (sign != null && sign.getType() == SignEdit.BLOCK_ENTITY_TYPE) {
+			Game.prevent();
+			SignEdit.LIBRARY.openSign(coords.x, coords.y, coords.z);
+		}
+	}
+});
+
+Callback.addCallback("NativeGuiChanged", function(screenName, lastScreenName) {
+	if (screenName == "sign_screen") {
+		// UI.getContext().updateTextboxText("\nabobus indev:\n" + lastScreenName);
+		SignEdit.LIBRARY.updateTextbox();
+	}
+});
 
 ModAPI.registerAPI("SignEdit", SignEdit);
